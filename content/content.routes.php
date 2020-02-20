@@ -45,7 +45,7 @@
 			$li_re->setAttribute('class', 'template');
 			$li_re->setAttribute('data-name', 'Redirect');
 			$li_re->setAttribute('data-type', 'redirect');
-			$header_re = new XMLElement('header', __('Redirect'));
+			$header_re = new XMLElement('header', '<h4>'. __('Redirect') . '</h4>');
 			$hidden_re = Widget::Input("settings[url-router][routes][][type]", 'redirect', 'hidden');
 			$li_re->appendChild($header_re);
 			$li_re->appendChild($hidden_re);
@@ -55,7 +55,7 @@
 			$li_ro->setAttribute('class', 'template');
 			$li_ro->setAttribute('data-name', 'Route');
 			$li_ro->setAttribute('data-type', 'route');
-			$header_ro = new XMLElement('header', __('Route'));
+			$header_ro = new XMLElement('header', '<h4>'. __('Route') . '</h4>');
 			$hidden_ro = Widget::Input("settings[url-router][routes][][type]", 'route', 'hidden');
 			$li_ro->appendChild($header_ro);
 			$li_ro->appendChild($hidden_ro);
@@ -164,29 +164,15 @@
 
 			$fieldset->appendChild($group);
 
-			$this->Form->appendChild($fieldset);
+			$this->Primary->appendChild($fieldset);
 
-			$this->Header->setAttribute('class', 'spaced-bottom');
-			$this->Context->setAttribute('class', 'spaced-right');
-			$this->Contents->setAttribute('class', 'centered-content');
 			$div = new XMLElement('div');
 			$div->setAttribute('class', 'actions');
+			$saveBtn = new XMLElement('button', Widget::SVGIcon('save'));
+			$saveBtn->setAttributeArray(array('name' => 'action[save]', 'class' => 'button', 'title' => __('Save changes'), 'type' => 'submit', 'accesskey' => 's'));
+			$div->appendChild($saveBtn);
 
-			$div->appendChild(
-				Widget::SVGIconContainer(
-					'save',
-					Widget::Input(
-						'action[save]',
-						__('Save Changes'),
-						'submit',
-						array('accesskey' => 's')
-					)
-				)
-			);
-
-			$div->appendChild(Widget::SVGIcon('chevron'));
-
-			$this->Form->appendChild($div);
+			$this->Controls->appendChild($div);
 
 		}
 	}
